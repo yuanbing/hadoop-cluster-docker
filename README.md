@@ -1,37 +1,40 @@
 ## Run Hadoop Cluster within Docker Containers
 
+It's inspired by the following articles.
 - Blog: [Run Hadoop Cluster in Docker Update](http://kiwenlau.com/2016/06/26/hadoop-cluster-docker-update-english/)
 - 博客: [基于Docker搭建Hadoop集群之升级版](http://kiwenlau.com/2016/06/12/160612-hadoop-cluster-docker-update/)
 
 
 ![alt tag](https://raw.githubusercontent.com/kiwenlau/hadoop-cluster-docker/master/hadoop-cluster-docker.png)
 
+The purpose is to run the latest hadoop (currently at 3.0.0.beta1) in a mini-cluster on local machine. By default the cluster contains 1 master node + 2 slave nodes.
 
 ### 3 Nodes Hadoop Cluster
 
-##### 1. pull docker image
+##### 1. clone github repository
 
 ```
-sudo docker pull kiwenlau/hadoop:1.0
+git clone https://github.com/yuanbing/hadoop-cluster-docker.git
 ```
 
-##### 2. clone github repository
+##### 2. build dokcer iamge
 
 ```
-git clone https://github.com/kiwenlau/hadoop-cluster-docker
+cd hadoop-cluster-docker
+./build-image.sh
 ```
 
 ##### 3. create hadoop network
 
 ```
-sudo docker network create --driver=bridge hadoop
+docker network create --driver=bridge hadoop
 ```
 
 ##### 4. start container
 
 ```
 cd hadoop-cluster-docker
-sudo ./start-container.sh
+./start-container.sh
 ```
 
 **output:**
@@ -72,11 +75,9 @@ Hadoop    1
 Hello    2
 ```
 
-### Arbitrary size Hadoop cluster
+### Resize hadoop cluster
 
-##### 1. pull docker images and clone github repository
-
-do 1~3 like section A
+##### 1. clone github repository
 
 ##### 2. rebuild docker image
 
@@ -96,5 +97,6 @@ sudo ./start-container.sh 5
 
 ##### 4. run hadoop cluster 
 
+```
 do 5~6 like section A
-
+```
